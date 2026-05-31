@@ -5,7 +5,7 @@ import QuestionHeader from '../components/QuestionHeader';
 import ExerciseRouter from '../exercises/ExerciseRouter';
 import ChatPanel from '../components/ChatPanel';
 
-export default function Question({ exercise, idx, total, onAnswer, onExit, locked, picked }) {
+export default function Question({ exercise, idx, total, onAnswer, onExit, locked, picked, status }) {
   const [chatOpen, setChatOpen]     = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
 
@@ -27,6 +27,7 @@ export default function Question({ exercise, idx, total, onAnswer, onExit, locke
             onAnswer={onAnswer}
             locked={locked}
             picked={picked}
+            status={status}
           />
           <div className="chat-trigger-wrap">
             <button className="chat-trigger" onClick={() => setChatOpen(true)}>

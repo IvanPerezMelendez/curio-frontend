@@ -153,6 +153,7 @@ export default function App() {
             onExit={exit}
             locked={locked}
             picked={picked}
+            status={lastStatus}
           />
         )}
 

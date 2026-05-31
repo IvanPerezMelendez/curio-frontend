@@ -1,4 +1,4 @@
-export default function ImageQuestion({ exercise, onAnswer, locked, picked }) {
+export default function ImageQuestion({ exercise, onAnswer, locked, picked, status }) {
   const { options, correct, imageColor, imageLabel } = exercise;
 
   return (
@@ -18,16 +18,18 @@ export default function ImageQuestion({ exercise, onAnswer, locked, picked }) {
         {options.map((opt, i) => {
           let cls = 'mc-opt mc-opt-sm';
           if (locked) {
-            if (i === correct)     cls += ' mc-correct';
-            else if (i === picked) cls += ' mc-wrong';
-            else                   cls += ' mc-fade';
+            if (i === correct)                        cls += ' mc-correct';
+            else if (i === picked && status === 'ok') cls += ' mc-correct';
+            else if (i === picked && status === 'no') cls += ' mc-wrong';
+            else if (i === picked)                    cls += ' mc-pick';
+            else                                      cls += ' mc-fade';
           } else if (i === picked) cls += ' mc-pick';
           return (
             <button
               key={i}
               className={cls}
               disabled={locked}
-              onClick={() => onAnswer(i === correct, i)}
+              onClick={() => onAnswer(null, i)}
             >
               <span className="mc-label">{opt}</span>
             </button>

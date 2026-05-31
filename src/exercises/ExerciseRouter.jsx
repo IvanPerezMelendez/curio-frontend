@@ -6,14 +6,14 @@ import MapClick        from './MapClick';
 import Chronological   from './Chronological';
 import Estimation      from './Estimation';
 
-export default function ExerciseRouter(props) {
+export default function ExerciseRouter({ status, ...props }) {
   const t = props.exercise.type;
-  if (t === 'multiple-choice' || t === 'odd-one-out') return <MultipleChoice {...props} />;
-  if (t === 'true-false')    return <TrueFalse      {...props} />;
-  if (t === 'image')         return <ImageQuestion  {...props} />;
+  if (t === 'multiple-choice' || t === 'odd-one-out') return <MultipleChoice status={status} {...props} />;
+  if (t === 'true-false')    return <TrueFalse      status={status} {...props} />;
+  if (t === 'image')         return <ImageQuestion  status={status} {...props} />;
   if (t === 'match')         return <Match          {...props} />;
-  if (t === 'map-click')     return <MapClick       {...props} />;
+  if (t === 'map-click')     return <MapClick       status={status} {...props} />;
   if (t === 'chronological') return <Chronological  {...props} />;
-  if (t === 'estimation')    return <Estimation     {...props} />;
+  if (t === 'estimation')    return <Estimation     status={status} {...props} />;
   return <div style={{ color: 'red' }}>Tipo desconocido: {t}</div>;
 }
