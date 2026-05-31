@@ -1,0 +1,11 @@
+services:
+
+  frontend:
+    build:
+      context: .
+      args:
+        # URL pública del backend, ej: https://api.tudominio.com
+        VITE_API_URL: ${VITE_API_URL}
+    restart: unless-stopped
+    ports:
+      - "80:80"
