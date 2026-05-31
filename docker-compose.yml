@@ -7,5 +7,5 @@ services:
         # URL pública del backend, ej: https://api.tudominio.com
         VITE_API_URL: ${VITE_API_URL}
     restart: unless-stopped
-    ports:
-      - "3000:80"
+    expose:
+      - "80"
