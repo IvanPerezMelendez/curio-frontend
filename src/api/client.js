@@ -1,4 +1,5 @@
-const BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+let BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+if (BASE && !BASE.startsWith('http')) BASE = 'https://' + BASE;
 
 function getToken() {
   return localStorage.getItem('curio_token');
