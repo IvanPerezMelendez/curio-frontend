@@ -61,16 +61,19 @@ export default function App() {
     setQuestionStart(Date.now());
   };
 
-  const handleAnswer = (isCorrect, answer) => {
+  const handleAnswer = async (_, answer) => {
     const ms = questionStart ? Date.now() - questionStart : null;
     const ex = session.exercises[idx];
     setLocked(true);
     setPicked(answer);
-    setLastStatus(isCorrect ? 'ok' : 'no');
     setAnswerTimes(prev => [...prev, ms]);
 
-    // fire-and-forget; UX doesn't wait for server confirmation
-    submitAnswer(session.session_id, ex.id, ex.type, answer, ms).catch(() => {});
+    try {
+      const res = await submitAnswer(session.session_id, ex.id, ex.type, answer, ms);
+      setLastStatus(res.correct ? 'ok' : 'no');
+    } catch {
+      setLastStatus('no');
+    }
 
     setTimeout(() => setPhase('explain'), 700);
   };
